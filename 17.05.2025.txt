@@ -1,0 +1,26 @@
+show databases;
+create database vit;
+use vit;
+CREATE TABLE vitBhopal (
+    name VARCHAR(100),
+    reg_no VARCHAR(20) PRIMARY KEY,
+    school VARCHAR(100),
+    cgpa INT
+);
+INSERT INTO vitBhopal (name, reg_no, school, cgpa) VALUES
+('siya', '21BCE1022', 'School of Computer Science', 8),
+('Rohan', '21EEE1002', 'School of Electrical Engineering', 8.9),
+('Sneha ', '21BCE1003', 'School of Mechanical Engineering', 9),
+('Adi', '20BCE1004', 'School of Computer Science', 7.6);
+INSERT INTO vitBhopal (name, reg_no, school, cgpa) VALUES
+('Priyanka', '21BCE1005', 'School of Computer Science', 9.8),
+('arav', '21ECE1006', 'School of Electronics Engineering', 6.7),
+('Manvi', '20BBA1007', 'School of Business', 9.3),
+('Anaya', '22BAE1008', 'School of Civil Engineering', 8.5),
+('Diya', '21BIO1009', 'School of Bio Sciences', 6.7);
+select * from vitBhopal;
+alter table vitBhopal add(mobile varchar(10));
+desc vitBhopal;
+alter table vitBhopal drop column mobile;
+alter table vitBhopal add(s_country varchar(10) default 'India');
+update vitBhopal set name='sarthak' WHERE name='Priyanka';
