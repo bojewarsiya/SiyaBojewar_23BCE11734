@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<hgroup>
+    <h2>Discover Stories</h2>
+    <p>Explore adventures created by the community.</p>
+</hgroup>
+
+<div class="story-grid">
+    {% for story in stories %}
+   
+    <article class="story-card">
+        <div>
+            <h5 style="margin-bottom: 0.5rem;">{{ story.title }}</h5>
+           
+            <p style="font-size: 0.9rem; color: var(--muted-text-color);">{{ story.description }}</p>
+            <small>By: {{ story.author_details.username }}</small>
+        </div>
+        <div class="story-card-actions">
+            {% if story.start_node_id %}
+             
+                {% if session.user_id %}
+                    <a href="{{ url_for('player', node_id=story.start_node_id) }}" role="button" class="btn-primary" style="width: 100%;">Play Story</a>
+                {% else %}
+                    <a href="{{ url_for('auth', next=url_for('player', node_id=story.start_node_id)) }}" role="button" class="btn-primary" style="width: 100%;">Play Story</a>
+                {% endif %}
+            {% else %}
+                <p><small>Story in progress...</small></p>
+            {% endif %}
+        </div>
+    </article>
+    {% else %}
+    <p>No stories have been created yet. Be the first!</p>
+    {% endfor %}
+</div>
+{% endblock %}

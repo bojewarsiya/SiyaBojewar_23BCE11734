@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Story Builder</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/pico-css@2.0.6/css/pico.min.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+</head>
+<body>
+    <nav class="container-fluid main-nav">
+        <div class="nav-left">
+            <strong>
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="brand-logo">Interactive Story Builder</a>
+                {% else %}
+                    <a href="{{ url_for('home') }}" class="brand-logo">Interactive Story Builder</a>
+                {% endif %}
+            </strong>
+        </div>
+        <div class="nav-right">
+            <a href="{{ url_for('discover') }}">Discover</a>
+            {% if session.user_id %}
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('auth') }}" role="button" class="btn-primary">Login / Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    
+    <div class="content-wrapper">
+        <main class="container">
+           
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <article class="flash-{{ category }}">
+                            {{ message }}
+                        </article>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+</body>
+</html>
